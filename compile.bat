@@ -16,6 +16,7 @@ for /f "delims=" %%i in ('where /r "C:\Program Files\Microsoft Visual Studio" vc
 if "%VS_PATH%"=="" (
     echo.
     echo [ERROR] Visual Studio could not be found!
+    echo.
     goto KEEP_ALIVE
 )
 
@@ -27,8 +28,8 @@ echo.
 echo Starting compilation...
 echo --------------------------------------------------------
 
-:: Compilation Command
-cl /EHsc /std:c++17 main.cpp /I"C:\Bee-Gold-Collector-Windows-11-Edition\compilelibs\include" /link /LIBPATH:"C:\Bee-Gold-Collector-Windows-11-Edition\compilelibs\libs\SFML" sfml-graphics.lib sfml-window.lib sfml-system.lib opengl32.lib winmm.lib gdi32.lib
+:: Dinamik yol (Bulunduğu klasördeki compilelibs kullanır)
+cl /EHsc /std:c++17 main.cpp /I"%~dp0compilelibs\include" /link /LIBPATH:"%~dp0compilelibs\libs\SFML" sfml-graphics.lib sfml-window.lib sfml-system.lib opengl32.lib winmm.lib gdi32.lib
 
 if %errorlevel% neq 0 (
     echo.
